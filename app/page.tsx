@@ -1,15 +1,15 @@
 'use client';
-import { Header } from '@/components';
+import { Header, Info } from '@/components';
 import { Button } from '@/ui';
-import Image from 'next/image';
 import { useAuth } from '@clerk/nextjs';
+import { InfoBlock } from '@/components/Info/InfoBlock';
 
 export default function Home() {
   const { isSignedIn } = useAuth();
   return (
     <div className='max-w-screen-xl mx-auto px-3'>
       <Header />
-      <div className='mt-5 lg:mt-20 max-w-6xl mx-auto lg:flex items-center'>
+      <div className='mt-5 lg:mt-20 lg:flex items-center'>
         <div>
           <h1 className='text-3xl text-center mx-auto lg:text-start sm:text-5xl'>
             <span className='font-bold text-[#0083ff]'>Cloud</span> -
@@ -23,7 +23,7 @@ export default function Home() {
           <div className='hidden sm:flex sm:justify-center mt-6 lg:block'>
             <Button
               text={`${isSignedIn ? 'Перейти в облако' : 'Начать'}`}
-              href='/files'
+              href='/upload'
             />
           </div>
         </div>
@@ -33,6 +33,10 @@ export default function Home() {
           className='w-[400px] mx-auto lg:w-[500px]'
           alt=''
         />
+      </div>
+
+      <div>
+        <Info />
       </div>
     </div>
   );

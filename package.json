@@ -11,6 +11,7 @@
   "dependencies": {
     "@clerk/localizations": "^1.26.13",
     "@clerk/nextjs": "^4.29.1",
+    "firebase": "^10.7.1",
     "next": "14.0.4",
     "prettier": "^3.1.1",
     "react": "^18",

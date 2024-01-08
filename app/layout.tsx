@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider localization={ruRU}>
-      <html lang='en'>
+      <html lang='ru'>
         <body className={inter.className}>{children}</body>
       </html>
     </ClerkProvider>

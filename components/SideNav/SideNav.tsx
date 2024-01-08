@@ -3,6 +3,7 @@ import { TbUpload, TbFiles } from 'react-icons/tb';
 import { GrUpdate } from 'react-icons/gr';
 import { Logo } from '@/components';
 import { useState } from 'react';
+import Link from 'next/link';
 
 export const SideNav = () => {
   const [activeLink, setActiveLink] = useState(0);
@@ -34,18 +35,19 @@ export const SideNav = () => {
       </div>
       <div>
         {menuList.map((list, index) => (
-          <div
-            onClick={() => setActiveLink(index)}
-            key={list.id}
-            className={`hover:bg-gray-100 py-5 px-3 transition duration-100 cursor-pointer rounded
+          <Link key={list.id} href={list.path}>
+            <div
+              onClick={() => setActiveLink(index)}
+              className={`hover:bg-gray-100 py-5 px-3 transition duration-100 cursor-pointer rounded
             ${activeLink === index ? 'bg-blue-100' : null}
             `}
-          >
-            <div className='flex items-center gap-x-2'>
-              <div>{list.icon({ size: 30, color: '#0083ff' })}</div>
-              <h2>{list.name}</h2>
+            >
+              <div className='flex items-center gap-x-2'>
+                <div>{list.icon({ size: 30, color: '#0083ff' })}</div>
+                <h2>{list.name}</h2>
+              </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
