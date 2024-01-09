@@ -14,7 +14,6 @@ export const UploadForm = ({
   progress: number;
 }) => {
   const [file, setFile] = useState<File | null>(null)!;
-  console.log(file);
   const handleUploadFile = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files === null) return;
     setFile(e.target.files[0]);
@@ -93,8 +92,9 @@ export const UploadForm = ({
 
       {progress === 100 && (
         <div className='text-center mt-4'>
-          <p className="mb-4 text-2xl font-bold">Загрузка завершена!</p>
-          <Button text="Перейти к файлу" href="/files"/>
+          <p className='mb-4 text-2xl font-bold'>
+            Загрузка завершена!
+          </p>
         </div>
       )}
     </div>
