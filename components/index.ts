@@ -3,3 +3,4 @@ export { SideNav } from './SideNav/SideNav';
 export { Logo } from './Logo/Logo';
 export { Info } from './Info/Info';
 export { Navbar } from './Navbar/Navbar';
+export { ToolTip } from './ToolTip/ToolTip';

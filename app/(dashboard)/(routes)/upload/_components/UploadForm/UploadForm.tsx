@@ -4,6 +4,7 @@ import {
   FilePreview,
   ProgressBar,
 } from '@/app/(dashboard)/(routes)/upload/_components';
+import { Button } from '@/ui';
 
 export const UploadForm = ({
   uploadBtnClick,
@@ -13,12 +14,16 @@ export const UploadForm = ({
   progress: number;
 }) => {
   const [file, setFile] = useState<File | null>(null)!;
+  console.log(file);
   const handleUploadFile = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files === null) return;
     setFile(e.target.files[0]);
   };
+  const handleDeleteFile = () => {
+    setFile(null);
+  };
   return (
-    <div className=''>
+    <div>
       <div className='flex items-center justify-center px-3 lg:px-0 max-w-[800px] xl:w-[800px]'>
         <label
           form='dropzone-file'
@@ -50,7 +55,20 @@ export const UploadForm = ({
         </label>
       </div>
 
-      {file && <FilePreview file={file} />}
+      <div>
+        {progress !== 100 && (
+          <div>
+            {file && (
+              <div className='px-3'>
+                <FilePreview
+                  file={file}
+                  handleDeleteFile={handleDeleteFile}
+                />
+              </div>
+            )}
+          </div>
+        )}
+      </div>
 
       {progress !== 100 && (
         <div>
@@ -73,7 +91,12 @@ export const UploadForm = ({
         </div>
       )}
 
-      {progress === 100 && <div className="text-center">Загрузка завершена!</div>}
+      {progress === 100 && (
+        <div className='text-center mt-4'>
+          <p className="mb-4 text-2xl font-bold">Загрузка завершена!</p>
+          <Button text="Перейти к файлу" href="/files"/>
+        </div>
+      )}
     </div>
   );
 };
