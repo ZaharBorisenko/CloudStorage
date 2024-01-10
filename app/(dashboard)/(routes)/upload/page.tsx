@@ -1,6 +1,5 @@
 'use client';
 import { UploadForm } from '@/app/(dashboard)/(routes)/upload/_components';
-import { v4 } from 'uuid';
 import {
   getDownloadURL,
   getStorage,
@@ -8,20 +7,25 @@ import {
   uploadBytesResumable,
 } from '@firebase/storage';
 import { app } from '@/firebaseConfig';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { doc, getFirestore, setDoc } from '@firebase/firestore';
 import { useUser } from '@clerk/nextjs';
 import { generateRandomString } from '@/utils/generateRandomString';
+import { useRouter } from 'next/navigation';
 
 export default function Upload() {
+  const [docId, setDocId] = useState<string | null>(null);
+  const [uploadComplete, setUploadComplete] = useState(false);
   const db = getFirestore(app);
-  console.log(db);
+  const router = useRouter()
   const { user } = useUser();
   const [progress, setProgress] = useState<number>(0);
   const storage = getStorage(app);
 
   const saveInfo = async (file: File, fileUrl: any) => {
     const documentId = generateRandomString();
+    setDocId(documentId)
+    console.log(`documentId: ${documentId}`);
     await setDoc(doc(db, 'uploadedFile', documentId), {
       fileName: file?.name,
       fileSize: file?.size,
@@ -32,7 +36,7 @@ export default function Upload() {
       password: '',
       id: documentId,
       shortUrl: process.env.NEXT_PUBLIC_BASE_URL + '/' + documentId,
-    }).then(res => console.log(res));
+    });
   };
 
   const uploadBtnClick = (file: File) => {
@@ -56,9 +60,18 @@ export default function Upload() {
       progress === 100 &&
         getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
           saveInfo(file, downloadURL);
+          setUploadComplete(true)
         });
     });
   };
+  console.log(`docIdState:${docId}`);
+  useEffect(() => {
+    if (progress === 100) {
+      setTimeout(() => {
+        router.push(`/file-preview/${docId}`)
+      },2000)
+    }
+  }, [uploadComplete]);
 
   return (
     <div>
