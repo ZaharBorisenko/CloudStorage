@@ -58,7 +58,7 @@ export default function FilePreview({
             </div>
 
             <div className='mt-10'>
-              <CheckedPassword/>
+              <CheckedPassword fileId={params.fileId}/>
             </div>
 
             <div>

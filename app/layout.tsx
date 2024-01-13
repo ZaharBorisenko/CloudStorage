@@ -4,7 +4,8 @@ import './globals.css';
 import { ClerkProvider } from '@clerk/nextjs';
 import React from 'react';
 import { ruRU } from "@clerk/localizations";
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -20,7 +21,10 @@ export default function RootLayout({
   return (
     <ClerkProvider localization={ruRU}>
       <html lang='ru'>
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+        <ToastContainer/>
+        {children}
+        </body>
       </html>
     </ClerkProvider>
   );

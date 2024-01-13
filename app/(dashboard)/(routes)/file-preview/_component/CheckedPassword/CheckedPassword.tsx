@@ -1,10 +1,25 @@
 'use client';
 import { useState } from 'react';
 import { Input } from '@/ui';
+import { doc, getFirestore, updateDoc } from '@firebase/firestore';
+import { app } from '@/firebaseConfig';
+import { toast } from 'react-toastify';
 
-export const CheckedPassword = () => {
+export const CheckedPassword = ({ fileId }: { fileId: string }) => {
   const [checked, setChecked] = useState<boolean>(false);
   const [password, setPassword] = useState<string>('');
+  const db = getFirestore(app);
+  const onSavePassword = async () => {
+    const docRef = doc(db, 'uploadedFile', fileId);
+    try {
+      await updateDoc(docRef, {
+        password,
+      });
+      toast.success('Пароль изменён', {autoClose:1500, position:"top-center"})
+    }catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <div>
       <label className='flex items-center gap-x-4'>
@@ -20,13 +35,18 @@ export const CheckedPassword = () => {
       {checked && (
         <div className='mt-3'>
           <Input
-            placeholder="Введите пароль..."
+            placeholder='Введите пароль...'
             disabled={false}
             value={password}
             setValue={setPassword}
             copy={false}
           />
-          <button className="mt-2 bg-[#0083ff] py-1 px-2 rounded-lg text-white text-lg">Сохранить</button>
+          <button
+            onClick={() => onSavePassword()}
+            className='mt-2 bg-[#0083ff] py-1 px-2 rounded-lg text-white text-lg'
+          >
+            Сохранить
+          </button>
         </div>
       )}
     </div>
