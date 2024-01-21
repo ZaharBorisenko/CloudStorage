@@ -8,6 +8,7 @@ import { PreviewImg } from '@/app/(dashboard)/(routes)/file-preview/_component/P
 import { Label } from '@/components';
 import { CheckedPassword } from '@/app/(dashboard)/(routes)/file-preview/_component/CheckedPassword/CheckedPassword';
 import { EmailBlock } from '@/app/(dashboard)/(routes)/file-preview/_component/EmailBlock/EmailBlock';
+import GlobalAPI from '@/utils/GlobalAPI';
 
 export interface FileType {
   fileName: string;
@@ -29,12 +30,22 @@ export default function FilePreview({
   const db = getFirestore(app);
   const [fileInfo, setFileInfo] = useState<FileType | any>();
   console.log(fileInfo);
+  const [email, setEmail] = useState<string>('');
   const getFileInfo = async () => {
     const docRef = doc(db, 'uploadedFile', params.fileId);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) setFileInfo(docSnap.data());
   };
+  const sendEmail = () => {
+    const data = {
+      emailToSend: email,
+      userName: fileInfo.userName,
+    };
+    GlobalAPI.SendEmail(data).then(res => {
+      console.log(res)
+    })
+  }
 
   useEffect(() => {
     params.fileId && getFileInfo();
@@ -62,7 +73,7 @@ export default function FilePreview({
             </div>
 
             <div>
-              <EmailBlock/>
+              <EmailBlock email={email} sendEmail={sendEmail} setEmail={setEmail}/>
             </div>
 
           </div>

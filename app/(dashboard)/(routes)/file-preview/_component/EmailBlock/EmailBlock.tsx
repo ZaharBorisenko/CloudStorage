@@ -1,9 +1,13 @@
 import { Input } from '@/ui';
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import { Label } from '@/components';
 
-export const EmailBlock = () => {
-  const [email, setEmail] = useState<string>('');
+type propsType = {
+  sendEmail: () => void,
+  email: string,
+  setEmail: (email: string) => void,
+}
+export const EmailBlock:FC<propsType> = ({sendEmail, email,setEmail}) => {
   return (
     <div>
       <div className="mt-10">
@@ -17,7 +21,11 @@ export const EmailBlock = () => {
             placeholder='Введите email'
           />
         </div>
-        <button className="w-full bg-[#0083ff] rounded-lg mt-5 py-3 text-lg text-white">Отправить email</button>
+        <button
+          onClick={() => sendEmail()}
+          className="w-full bg-[#0083ff] rounded-lg mt-5 py-3 text-lg text-white">
+          Отправить email
+        </button>
       </div>
     </div>
   );
