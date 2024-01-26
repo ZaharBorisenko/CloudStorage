@@ -34,7 +34,7 @@ export default function Upload() {
       userName: user?.fullName,
       password: '',
       id: documentId,
-      shortUrl: process.env.NEXT_PUBLIC_BASE_URL + '/' + documentId,
+      shortUrl: process.env.NEXT_PUBLIC_BASE_URL + '/' + 'file/' + documentId,
     });
   };
 

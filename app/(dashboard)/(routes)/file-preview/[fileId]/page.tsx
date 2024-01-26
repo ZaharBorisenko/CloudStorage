@@ -29,18 +29,24 @@ export default function FilePreview({
 }) {
   const db = getFirestore(app);
   const [fileInfo, setFileInfo] = useState<FileType | any>();
-  console.log(fileInfo);
-  const [email, setEmail] = useState<string>('');
+  const [email, setEmail] = useState<string>('test@gmail.com');
   const getFileInfo = async () => {
     const docRef = doc(db, 'uploadedFile', params.fileId);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) setFileInfo(docSnap.data());
   };
+  console.log(fileInfo);
   const sendEmail = () => {
     const data = {
-      emailToSend: email,
       userName: fileInfo.userName,
+      emailToSend: email,
+      fileName: fileInfo.fileName,
+      fileSize: fileInfo.fileSize,
+      fileType: fileInfo.fileType,
+      fileLink: fileInfo.shortUrl,
+      filePassword: fileInfo.filePassword,
+
     };
     GlobalAPI.SendEmail(data).then(res => {
       console.log(res)

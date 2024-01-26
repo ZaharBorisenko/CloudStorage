@@ -16,8 +16,8 @@ import {
 interface EmailTemplateProps {
   firstName: string;
 }
-
-export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({ firstName }) => (
+// @ts-ignore
+export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({ resp }) => (
   <Html>
     <Head />
     <Preview>Yelp recent login</Preview>
@@ -27,17 +27,8 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({ firstNam
           <Img src={`https://swipecrafters.com/`} />
         </Section>
 
-        <Section style={content}>
+        <Section>
           <Row>
-            {/*<Img*/}
-            {/*  style={image}*/}
-            {/*  width={620}*/}
-            {/*  src={`${baseUrl}/static/yelp-header.png`}*/}
-            {/*/>*/}
-            <p>header</p>
-          </Row>
-
-          <Row style={{ ...boxInfos, paddingBottom: "0" }}>
             <Column>
               <Heading
                 style={{
@@ -46,40 +37,33 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({ firstNam
                   textAlign: "center",
                 }}
               >
-                Hi {firstName},
+                Привет {resp.emailToSend.split("@")[0]}!
               </Heading>
-              <Text
-                style={{
-                  color: "rgb(0,0,0, 0.5)",
-                  fontSize: 14,
-                  marginTop: -5,
-                }}
-              >
-                *Approximate geographic location based on IP address:
-              </Text>
 
-              <Text style={paragraph}>
-                If this was you, there&apos;s nothing else you need to do.
+              <Text style={title}>
+                Информация о файле:
               </Text>
-              <Text style={{ ...paragraph, marginTop: -5 }}>
-                If this wasn&apos;t you or if you have additional questions, please
-                see our support page.
+              <Text>
+                Имя файла: {resp.fileName}
               </Text>
-            </Column>
-          </Row>
-          <Row style={{ ...boxInfos, paddingTop: "0" }}>
-            <Column style={containerButton} colSpan={2}>
-              <Button style={button}>Learn More</Button>
+              <Text>
+                {resp?.fileType} |{' '}
+                {(resp?.fileSize / 1024 / 1024).toFixed(3)} MB
+              </Text>
             </Column>
           </Row>
         </Section>
 
-        <Section style={containerImageFooter}>
-          {/*<Img*/}
-          {/*  style={image}*/}
-          {/*  width={620}*/}
-          {/*  src={`${baseUrl}/static/yelp-footer.png`}*/}
-          {/*/>*/}
+        <Section>
+          <Row>
+            <Column>
+              <Button
+                href={resp.fileLink}
+              >
+                Перейти к файлу
+              </Button>
+            </Column>
+          </Row>
         </Section>
 
         <Text
@@ -103,45 +87,11 @@ const main = {
     '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
 };
 
-
-const paragraph = {
-  fontSize: 16,
-};
-
 const logo = {
   padding: "30px 20px",
 };
+const title = {
+  fontSize: "30px",
+  fontWeight: 700,
+}
 
-const containerButton = {
-  display: "flex",
-  justifyContent: "center",
-  width: "100%",
-};
-
-const button = {
-  backgroundColor: "#e00707",
-  borderRadius: 3,
-  color: "#FFF",
-  fontWeight: "bold",
-  border: "1px solid rgb(0,0,0, 0.1)",
-  cursor: "pointer",
-  padding: "12px 30px",
-};
-
-const content = {
-  border: "1px solid rgb(0,0,0, 0.1)",
-  borderRadius: "3px",
-  overflow: "hidden",
-};
-
-const image = {
-  maxWidth: "100%",
-};
-
-const boxInfos = {
-  padding: "20px",
-};
-
-const containerImageFooter = {
-  padding: "45px 0 0 0",
-};
