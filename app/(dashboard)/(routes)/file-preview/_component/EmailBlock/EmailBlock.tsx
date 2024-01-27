@@ -16,7 +16,6 @@ export const EmailBlock:FC<propsType> = ({sendEmail, email,setEmail}) => {
           <Input
             disabled={false}
             value={email}
-            copy={false}
             setValue={setEmail}
             placeholder='Введите email'
           />

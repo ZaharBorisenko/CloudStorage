@@ -2,13 +2,13 @@
 import { useEffect, useState } from 'react';
 import { doc, getDoc, getFirestore } from '@firebase/firestore';
 import { app } from '@/firebaseConfig';
-import Image from 'next/image';
 import { Input } from '@/ui';
 import { PreviewImg } from '@/app/(dashboard)/(routes)/file-preview/_component/PreviewImg/PreviewImg';
 import { Label } from '@/components';
 import { CheckedPassword } from '@/app/(dashboard)/(routes)/file-preview/_component/CheckedPassword/CheckedPassword';
 import { EmailBlock } from '@/app/(dashboard)/(routes)/file-preview/_component/EmailBlock/EmailBlock';
 import GlobalAPI from '@/utils/GlobalAPI';
+import { FaRegCopy,FaCheck } from 'react-icons/fa';
 
 export interface FileType {
   fileName: string;
@@ -66,10 +66,11 @@ export default function FilePreview({
 
           <div className='w-full'>
             <div>
-              <Label>Short Url</Label>
+              <Label>Ссылка на файл</Label>
               <Input
+                icon={FaRegCopy}
+                icon2={FaCheck}
                 disabled={true}
-                copy={true}
                 value={fileInfo.shortUrl}
               />
             </div>

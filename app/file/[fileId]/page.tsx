@@ -7,7 +7,7 @@ import { FileType } from '@/app/(dashboard)/(routes)/file-preview/[fileId]/page'
 
 function FileView({params}: {params: {fileId:string}}) {
   const db = getFirestore(app)
-  const [fileInfo, setFileInfo] = useState<FileType | any>();
+  const [fileInfo, setFileInfo] = useState<FileType | null>(null);
   console.log(fileInfo);
   const getFileInfo = async () => {
     const docRef = doc(db, 'uploadedFile', params.fileId);

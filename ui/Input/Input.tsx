@@ -1,20 +1,33 @@
-import { FC } from 'react';
-import { FaRegCopy } from 'react-icons/fa';
+'use client';
+import { FC, useState } from 'react';
+import { IconType } from 'react-icons';
+import { toast } from 'react-toastify';
 
 type props = {
   disabled: boolean;
   value: string;
-  copy: boolean;
   setValue?: (value: string) => void;
   placeholder?: string;
+  icon?: IconType;
+  icon2?: IconType;
 };
 export const Input: FC<props> = ({
   disabled,
   value,
-  copy,
   setValue,
   placeholder,
+  icon,
+  icon2,
 }) => {
+  const [iconActive, setIconActive] = useState<boolean>(false);
+  const handleIcon = () => {
+    setIconActive(true);
+    navigator.clipboard.writeText(value);
+    toast.success('Ссылка скопирована в буфер обмена', {
+      autoClose: 1500,
+      position: 'top-center',
+    });
+  };
   return (
     <div className='relative'>
       <input
@@ -24,11 +37,14 @@ export const Input: FC<props> = ({
         value={value}
         disabled={disabled}
       />
-      {copy && (
-        <button className='absolute right-2 top-2 cursor-pointer'>
-          <FaRegCopy size={26} color='#0083ff' />
-        </button>
-      )}
+      <button
+        className='absolute right-2 top-2 cursor-pointer'
+        onClick={() => handleIcon()}
+      >
+        {!iconActive
+          ? icon && icon({ size: 26, color: '#0083ff' })
+          : icon2 && icon2({ size: 26, color: '#0083ff' })}
+      </button>
     </div>
   );
 };
