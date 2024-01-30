@@ -5,6 +5,7 @@ import {
   ProgressBar,
 } from '@/app/(dashboard)/(routes)/upload/_components';
 import { Button } from '@/ui';
+import { toast } from 'react-toastify';
 
 export const UploadForm = ({
   uploadBtnClick,
@@ -16,7 +17,25 @@ export const UploadForm = ({
   const [file, setFile] = useState<File | null>(null)!;
   const handleUploadFile = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files === null) return;
-    setFile(e.target.files[0]);
+    const validImageTypes = [
+      'image/jpeg',
+      'image/jpg',
+      'image/png',
+      'image/gif',
+      'image/webp',
+      'image/raw',
+      'image/psd',
+      'image/tiff',
+      'image/svg'
+    ];
+    const uploadsFile = e.target.files[0];
+    if (validImageTypes.includes(uploadsFile.type)) {
+      setFile(uploadsFile);
+    }else {
+      toast.warning('Извините, сейчас для загрузки доступны только изображения',
+        {position: "top-center", autoClose: 3000}
+      )
+    }
   };
   const handleDeleteFile = () => {
     setFile(null);
