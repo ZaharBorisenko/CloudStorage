@@ -49,8 +49,8 @@ export const UploadForm = ({
         rounded-lg cursor-pointer bg-blue-100 transition duration-300 hover:bg-blue-200'
         >
           <div className='flex flex-col items-center justify-center pt-5 pb-6'>
-            <div className='mb-4'>
-              <MdOutlineCloudUpload color={'#0083ff'} size={40} />
+            <div className='mb-4 animate-bounce'>
+              <MdOutlineCloudUpload color={'#0083ff'} size={50} />
             </div>
             <p className='mb-2 text-sm lg:text-lg text-gray-500 dark:text-gray-400 text-center'>
               <span className='text-[#0083ff] font-bold'>
