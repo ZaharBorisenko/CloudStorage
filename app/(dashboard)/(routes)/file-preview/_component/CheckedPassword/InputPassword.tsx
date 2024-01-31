@@ -4,15 +4,18 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 type props = {
   password: string;
   setPassword: (password: string) => void;
+  placeholder?:string
 };
 export const InputPassword: FC<props> = ({
   password,
   setPassword,
+  placeholder,
 }) => {
   const [openPassword, setOpenPassword] = useState(false);
   return (
     <div className='relative'>
       <input
+        placeholder={placeholder}
         type={`${!openPassword ? 'password' : 'text'}`}
         value={password}
         onChange={e => setPassword(e.target.value)}

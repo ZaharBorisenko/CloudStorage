@@ -71,6 +71,7 @@ export default function Files() {
                <FileInfo title="FileSize:" text={(file.fileSize / (1024 * 1024)).toFixed(2) + 'Mb'}/>
                <div className="mt-10">
                  <Link
+                   target="_blank"
                    className="bg-orange-500 rounded-lg px-2 py-4 text-base md:text-lg font-medium text-gray-100"
                    href={`/file/${file.id}`}
                  >Просмотр файла
