@@ -59,9 +59,7 @@ export const FileItem = ({ file }: { file: FileType | null }) => {
           <p className='font-semibold text-base sm:text-lg text-gray-500 text-center '>
             {file?.fileName} ┊ {file?.fileType} ┊{' '}
             {file &&
-              Math.round(file?.fileSize / (1024 * 1024)).toFixed(
-                0,
-              )}{' '}
+              Math.round(file?.fileSize / (1024 * 1024)).toFixed(0)}{' '}
             Мб
           </p>
         </div>
