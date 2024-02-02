@@ -1,36 +1,16 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# CloudStorage:
 
-First, run the development server:
+**Описание проекта**: Данный проект представляет собой сервис для хранения и обмена файлами в облаке. Пользователи могут загружать файлы на сайт и делиться ими с другими пользователями.  
+Для обмена файлом существует два способа: либо скопировать сгенирированную ссылку для файла, либо отправить файл по электронной почте, которую можно ввести в соответствующем поле.   
+Также есть возможность установить пароль для файла, что обеспечивает дополнительную защиту: перед скачиванием файла другой пользователь должен ввести установленный вами пароль.  
+Для того чтобы загрузить файл - нужно обязательно зарегистрироваться, но для того чтобы скачать файл по ссылке регистрироваться не обязательно.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**Цель проекта**: По сути я хотел поработать с новыми технологиями и библиотеками, с которыми я ещё не работал, а именно:
+ 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+ - База данных: [Firebase](https://firebase.google.com/)
+ - Для упрощения регистрации и авторизации пользователей я использовал библиотеку [Clerk](https://clerk.com/docs)
+ - Для стилизации компонентов я использовал css-фраемворк [Tailwind CSS](https://tailwindcss.com/)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
