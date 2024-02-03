@@ -20,12 +20,12 @@ export const SideNav = () => {
       icon: TbFiles,
       path: '/files',
     },
-    {
-      id: 3,
-      name: 'Обновить',
-      icon: GrUpdate,
-      path: '/upgrade',
-    },
+    // {
+    //   id: 3,
+    //   name: 'Обновить',
+    //   icon: GrUpdate,
+    //   path: '/upgrade',
+    // },
   ];
 
   return (

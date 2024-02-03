@@ -3,9 +3,17 @@ import { Header, Info } from '@/components';
 import { Button } from '@/ui';
 import { useAuth } from '@clerk/nextjs';
 import { InfoBlock } from '@/components/Info/InfoBlock';
+import { CookiesModal } from '@/components/Сookies/CookiesModal';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
   const { isSignedIn } = useAuth();
+  const [openCookie, setCookie] = useState<string>('');
+  console.log(openCookie);
+  useEffect(() => {
+    const cookie = localStorage.getItem('cookieModal');
+    setCookie(cookie!);
+  }, []);
   return (
     <div className='max-w-screen-xl mx-auto px-3'>
       <Header />
@@ -38,6 +46,12 @@ export default function Home() {
       <div>
         <Info />
       </div>
+
+      {openCookie !== 'true' && (
+        <div className='relative'>
+          <CookiesModal />
+        </div>
+      )}
     </div>
   );
 }

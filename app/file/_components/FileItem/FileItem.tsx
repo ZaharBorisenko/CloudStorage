@@ -100,6 +100,7 @@ export const FileItem = ({ file }: { file: FileType | null }) => {
           <div>
             {userName !== file?.userName && (
               <div>
+                <p className="mt-3 mb-4 text-base md:text-lg font-medium">Введите пароль для скачивания</p>
                 {file?.password ? (
                   <InputPassword
                     password={passwordUser}
